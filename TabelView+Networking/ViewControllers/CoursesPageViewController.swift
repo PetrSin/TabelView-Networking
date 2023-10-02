@@ -34,7 +34,6 @@ class CoursesPageViewController: UIViewController {
         myTabelview.delegate = self
         
         
-        
         view.addSubview(myTabelview)
         myTabelview.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -89,7 +88,7 @@ class CoursesPageViewController: UIViewController {
         
         
         if let numberOfTest = course.numberOfTests{
-            cell.courseNumberOfTest.text = "Number Of Lessons: \(numberOfTest)"
+            cell.courseNumberOfTest.text = "Number Of Test: \(numberOfTest)"
         }
    
         //работа с данными которые получаем из сети должно происходить асинхронно в глобальном потоке

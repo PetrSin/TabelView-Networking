@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 
 class DownloadImageController: UIViewController {
+    
+    private let url = "https://funart.top/uploads/posts/2022-08/1659985029_3-funart-pro-p-anime-tyanka-art-krasivo-3.jpg"
 
     let imageFromNetwork: UIImageView = {
         var view = UIImageView()
@@ -54,25 +56,16 @@ class DownloadImageController: UIViewController {
         self.myActivityIndef.isHidden = false   //делам индификатор видимым
         self.myActivityIndef.startAnimating()    //запускаем индификатор
                
+        //теперь вызывааем метод прописанный в networkManager для получения изображения из интнрнета, передавая ему url
+        NetworkManager.downloadImage(urlImage: url) { image in
+            
+            //в замыкании омтанавливаем анимацию активити контроллера
+            self.myActivityIndef.stopAnimating()
+            //присваиваем переданную картинку UIImageView
+            self.imageFromNetwork.image = image
+        }
                
-        //делаем проверку на валидность url адреса при нажатии на кнопку
-        guard let url = URL(string:"https://funart.top/uploads/posts/2022-08/1659985029_3-funart-pro-p-anime-tyanka-art-krasivo-3.jpg") else { return } //проверяем присвоится ли адрес переменной url если нет то просто выходим из метода
-               
-        //создаем экземпляр класса URLSession и вызываем метод shared
-        let session = URLSession.shared
-               
-        //dataTask - данный метод создает задачу на получение содержимого по указанному url
-        session.dataTask(with: url) { data, response, error in
-        //данные содержатся в data, делаем проверку на извлечение данных
-        if let data = data, let image = UIImage(data: data){
-        //чтобы оновить задачу по обновления интерфейса, ее необходимо передать в основной поток и сделать загрузку интерфейса асинхронной
-            DispatchQueue.main.async {
-                self.myActivityIndef.stopAnimating() //при получении изоюражения индификатор останавливается и скрывается
-                self.imageFromNetwork.image = image   //передаем полученное изображение UIImageView
-                }
-                       
-            }
-        }.resume()   //метод не будет запущен без указания этого метода
+
     }
 
     
