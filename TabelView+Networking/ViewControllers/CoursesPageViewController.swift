@@ -13,6 +13,7 @@ class CoursesPageViewController: UIViewController {
 
     var myTabelview = UITableView()
     var courses = [Course]()                    //тк код из блка do имеет ограниченную область видимости делаю его свойством класса
+    private let url = "https://swiftbook.ru//wp-content/uploads/api/api_courses"
     
     //создаем две переменные в которых будут храниться имя и ссылка выбранного курса
     //через func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
@@ -53,27 +54,15 @@ class CoursesPageViewController: UIViewController {
     
     func fetchData(){
 
-        let jsonURLString = "https://swiftbook.ru//wp-content/uploads/api/api_courses"
-        guard let url = URL(string: jsonURLString) else { return }
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data else { return }
+        //вызываю метод для получения данных о курсах из NetworkManager и через completion передаю данные в массив и вызываю перезагрузку странницы
+        NetworkManager.fetchDataCourse(url: url) { courses in
+            self.courses = courses
             
-            do{
-                let decoder = JSONDecoder()                 //создаю экземпляр декодера
-                decoder.keyDecodingStrategy = .convertFromSnakeCase  //вызываю свойство keyDecodingStrategy и выбираю параметр convertFromSnakeCase
-                
-                //и вызываю декодирование через уже созданный экземпляр
-                self.courses = try decoder.decode([Course].self, from: data)
-                
-                //метод необходим для перезагрузки данныз в таблице после подставления их с сервера
-                DispatchQueue.main.async {
-                    self.myTabelview.reloadData()
-                }
-                
-            }catch{
-                 print("error serialozation json - \(error)")
+            //в основном потоке асинхронно обнавляю данные в таблице
+            DispatchQueue.main.async {
+                self.myTabelview.reloadData()
             }
-        }.resume()
+        }
     }
     
     

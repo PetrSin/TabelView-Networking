@@ -105,5 +105,31 @@ class NetworkManager{
         }.resume()   //метод не будет запущен без указания этого метода
     }
     
+    
+    //метод будет вызываться при переходе на экран с курсами
+    //параметры - сыллка на апи с курсами, замыкание для передачи данных (массив полученых данных с серваера и метод reloadData для таблицы)
+    static func fetchDataCourse(url: String, comletion: @escaping (_ courses: [Course])->()){
+        
+        
+        let jsonURLString = url
+        guard let url = URL(string: jsonURLString) else { return }
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            guard let data = data else { return }
+            
+            do{
+                let decoder = JSONDecoder()                 //создаю экземпляр декодера
+                decoder.keyDecodingStrategy = .convertFromSnakeCase  //вызываю свойство keyDecodingStrategy и выбираю параметр convertFromSnakeCase
+                
+                //создаю новый массив courses
+                let courses = try decoder.decode([Course].self, from: data)
+                //вызывааю комплишен для передачи массива
+                comletion(courses)
+                
+            }catch{
+                 print("error serialozation json - \(error)")
+            }
+        }.resume()
+    }
+    
 }
 

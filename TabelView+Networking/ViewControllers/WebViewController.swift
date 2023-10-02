@@ -35,7 +35,6 @@ class WebViewController: UIViewController, WKUIDelegate {
       
         guard let url = URL(string: courseURL) else { return }
         let request = URLRequest(url: url)
-        print(request)
         webView.load(request)
     }
     
