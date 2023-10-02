@@ -8,11 +8,27 @@
 import UIKit
 import SnapKit
 
+//создаю энум для перечесления всех возможноз пользовательских нажатий
+//необхлжимы констаанты  перечесления использовать в качестве значений массива actiion6 для этого необходимо подписаться на проткол CaseIterable
+//данный протокол позволяет вызвать свойсво allCases - которое создает массив из значений этого перечесления
+//подписываем перечесление под String чтобы скоректировать тип сзначений массива
+enum Actions: String, CaseIterable{
+    case downloadImage = "Download Image"
+    case get = "GET"
+    case post = "POST"
+    case ourCourses = "Our Courses"
+    case uploadImage = "Upload Image"
+}
+
+
+
 private let url = "https://jsonplaceholder.typicode.com/posts"
 
 class CollectionViewController: UIViewController {
 
-    let actiion = ["Download Image", "GET", "POST", "Our Courses", "Upload Image"]
+    //let actiion = ["Download Image", "GET", "POST", "Our Courses", "Upload Image"]
+    
+    let actions = Actions.allCases
     
     let myCollection: UICollectionView = {
         let collectionLayout = UICollectionViewFlowLayout()
@@ -53,13 +69,14 @@ class CollectionViewController: UIViewController {
 
 extension CollectionViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return actiion.count
+        return actions.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = myCollection.dequeueReusableCell(withReuseIdentifier: CollectionViewController.idCell, for: indexPath) as! CollectionCell
-        //название ячеек это текст из массива
-        cell.cellLabel.text = actiion[indexPath.item]
+        //получение текствого значения эллемента перечесления  через rawValue
+        //те обращаюсь к массиву элеметов перечесления и вызываю метод для извлечения их значения
+        cell.cellLabel.text = actions[indexPath.item].rawValue
         
         return cell
     }
@@ -70,23 +87,22 @@ extension CollectionViewController: UICollectionViewDelegate{
     //метод который отвесает за выбранную ячейку
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //передает в переменную название выьранной ячеки
-        let action = actiion[indexPath.item]
+        let action = actions[indexPath.item]
         
         
         //через конструкцию свич вызываю необходимые контроллеры или вызываю методы из networking
+        //теперь делаю проверку нажатия не по тексту, а по эллементу массива
         switch action{
-        case "Download Image":
+        case .downloadImage:
             navigationController?.pushViewController(DownloadImageController(), animated: true)
-        case "GET":
+        case .get:
             NetworkManager.getAction(url: url)          //юрл прописан в начале файла
-        case "POST":
+        case .post:
             NetworkManager.postAction(url: url)
-        case "Our Courses":
+        case .ourCourses:
             navigationController?.pushViewController(CoursesPageViewController(), animated: true)
-        case "Upload Image":
+        case .uploadImage:
             print("Upload Image")
-        default:
-            break
         }
     }
 }
