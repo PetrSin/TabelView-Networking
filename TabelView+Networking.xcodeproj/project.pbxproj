@@ -20,6 +20,7 @@
 		D2E6483D2AC33D1200B17E27 /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E6483C2AC33D1200B17E27 /* CollectionCell.swift */; };
 		D2E648402AC33D6600B17E27 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E6483F2AC33D6600B17E27 /* NetworkManager.swift */; };
 		D2E648432AC33DA600B17E27 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E648422AC33DA600B17E27 /* Course.swift */; };
+		D2E648452ACC594B00B17E27 /* ImageProperties .swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E648442ACC594B00B17E27 /* ImageProperties .swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		D2E6483C2AC33D1200B17E27 /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
 		D2E6483F2AC33D6600B17E27 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		D2E648422AC33DA600B17E27 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
+		D2E648442ACC594B00B17E27 /* ImageProperties .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageProperties .swift"; sourceTree = "<group>"; };
 		D5E90FEF331F98E17A7F3A6C /* Pods-TabelView+Networking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TabelView+Networking.debug.xcconfig"; path = "Target Support Files/Pods-TabelView+Networking/Pods-TabelView+Networking.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,6 +94,7 @@
 		D2E6481A2AC338E100B17E27 /* TabelView+Networking */ = {
 			isa = PBXGroup;
 			children = (
+				D2E648442ACC594B00B17E27 /* ImageProperties .swift */,
 				D2E648302AC33B4700B17E27 /* ViewControllers */,
 				D2E6483E2AC33D4D00B17E27 /* Networking */,
 				D2E648412AC33D9100B17E27 /* Model */,
@@ -271,6 +274,7 @@
 				D2E648362AC33C1700B17E27 /* CoursesPageViewController.swift in Sources */,
 				D2E648402AC33D6600B17E27 /* NetworkManager.swift in Sources */,
 				D2E6483D2AC33D1200B17E27 /* CollectionCell.swift in Sources */,
+				D2E648452ACC594B00B17E27 /* ImageProperties .swift in Sources */,
 				D2E6481C2AC338E100B17E27 /* AppDelegate.swift in Sources */,
 				D2E648382AC33C4600B17E27 /* DownloadImageController.swift in Sources */,
 			);

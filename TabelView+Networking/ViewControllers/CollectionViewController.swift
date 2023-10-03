@@ -23,6 +23,7 @@ enum Actions: String, CaseIterable{
 
 
 private let url = "https://jsonplaceholder.typicode.com/posts"
+private let urlUploadImage = "https://api.imgur.com/3/image"   //ссылка на сервер для загузки изображения
 
 class CollectionViewController: UIViewController {
 
@@ -102,7 +103,7 @@ extension CollectionViewController: UICollectionViewDelegate{
         case .ourCourses:
             navigationController?.pushViewController(CoursesPageViewController(), animated: true)
         case .uploadImage:
-            print("Upload Image")
+            NetworkManager.uploadImage(url: urlUploadImage)
         }
     }
 }

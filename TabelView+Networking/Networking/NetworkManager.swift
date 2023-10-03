@@ -131,5 +131,55 @@ class NetworkManager{
         }.resume()
     }
     
+    
+    //метод для отправки изображения на сервер по нажатию кнопки Upload image
+    static func uploadImage(url: String){
+        
+        //словарь со значениями авторизации для выгрузки изображения взятые из апи https://imgur.com/
+        let httpHeaders = ["Authorization": "Client-ID 1e714caaa17c2c2"]
+        
+        let image = UIImage(named: "lite")! //изображение берется из ассетов(возврвщает опционал)
+        
+        //экземпляр созданной структуры для отправки изображения
+        //ключ берется из апи для выгрузки изобрадения
+        //тк инициализатор опциональный необходима проверка
+        guard let imageProp = ImageProperties(forKey: "image", withImage: image ) else { return }
+        
+        //создаем url
+        guard let url = URL(string: url) else { return }
+        
+        //в отличчи от гет запросса в пост запроссе неообходимо передовать ряд параметров для этого необходим URLRequest
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"      //тк передаем данные необходим протокол POST
+        
+        
+        
+        //необзходимо передать на сервер параметры авторизации - для этого необходим словарь
+        request.allHTTPHeaderFields = httpHeaders      //додавляем заголовок в запрос
+        
+        //также в запрос необзодимо поместить данные для отправки на сервер
+        //добавляем в тело запроса данные с изображением
+        request.httpBody = imageProp.data
+        
+        //создаем сессию но с URLRequest для отправки изображения
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            //вывожу ответ сервера если он есть
+            if let response = response{
+                print(response)
+            }
+            
+            //если есть дата получаем ее и если она приходит блоком do catch и JSONSerialization разворачиваю ее и отправляю в консоль
+            if let data = data{
+                do{
+                    let json = try JSONSerialization.jsonObject(with: data)
+                    print(json)
+                }catch{
+                    print("ERROR - \(error)")
+                }
+            }
+        }.resume() 
+        
+    }
+    
 }
 
