@@ -10,6 +10,8 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    //для захвата интендификтора необходимо объявить свойство с типом опцтновальным замыканием
+    var bgSessionComplitionHandler: (() -> ())?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -24,6 +26,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         return true
+    }
+    
+    //метод для перехвата интендификатора сессии
+    //необходимо сохранить значение полученное completionHandler с интендификторм сессии
+    func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
+        
+        //созраняем значение в созданное свойство
+        bgSessionComplitionHandler = completionHandler
     }
 
 }

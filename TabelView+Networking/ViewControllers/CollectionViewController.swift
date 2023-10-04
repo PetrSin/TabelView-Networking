@@ -18,6 +18,7 @@ enum Actions: String, CaseIterable{
     case post = "POST"
     case ourCourses = "Our Courses"
     case uploadImage = "Upload Image"
+    case downloadFile = "Download File"
 }
 
 
@@ -104,6 +105,8 @@ extension CollectionViewController: UICollectionViewDelegate{
             navigationController?.pushViewController(CoursesPageViewController(), animated: true)
         case .uploadImage:
             NetworkManager.uploadImage(url: urlUploadImage)
+        case .downloadFile:
+            print("download")
         }
     }
 }
