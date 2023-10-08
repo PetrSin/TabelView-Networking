@@ -9,7 +9,7 @@
 //класс необходимый для загрузки данных в фоновом режиме
 import UIKit
 
-class DataProvider: NSObject {
+class DataProvider: NSObject{
     
     //свойсво класса которое захватывает текущий путь к файлу
     var fileLocation: ((URL) -> ())?
@@ -20,13 +20,15 @@ class DataProvider: NSObject {
     //cоздаем объект для натройки сесси
     private var downloadTask: URLSessionDownloadTask!
     
+    
+    
     //создаем лениваю приватную переменную ждя настройки конфигураций данных в фоне
     private lazy var backgroundSession: URLSession = {
         //свойство config будет определять поведение сесси при загрузки и выгрузки данных
         //создаем экземпляр класса URLSessionConfiguration
         //для возможномти загрузки в фоне вызываем метод background - в параметры передаем итндификатор приложения
-        let config = URLSessionConfiguration.background(withIdentifier: "Hello ")
-        //config.isDiscretionary = true      //свойство определяет могут ли фоновые задачи быть запланированны по усматрению системы (для передачи больших данных ставим тру)
+        let config = URLSessionConfiguration.background(withIdentifier: "Hello")
+        config.isDiscretionary = true      //свойство определяет могут ли фоновые задачи быть запланированны по усматрению системы (для передачи больших данных ставим тру)
         config.sessionSendsLaunchEvents = true    //по завершению загрузки данных приложение запустится в фоновм режиме
         //возаращаем объект URLSession с параметрами конфигурации сессии( в качетве делегата протокола назаначаю этот класс)
         return URLSession(configuration: config , delegate: self, delegateQueue: nil )
@@ -93,14 +95,16 @@ extension DataProvider: URLSessionDownloadDelegate{
     }
     
     //метод для отображения процесса загрузки
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+    func urlSession(_ session: URLSession,
+                    downloadTask: URLSessionDownloadTask,
+                    didWriteData bytesWritten: Int64,
+                    totalBytesWritten: Int64,
+                    totalBytesExpectedToWrite: Int64) {
         
         guard totalBytesExpectedToWrite != NSURLSessionTransferSizeUnknown else { return }
         
-        let progress = Double(totalBytesWritten / totalBytesExpectedToWrite) //делим полученное количество байт на общее количество байт
-        print("download progress: \(progress)")
-        
-        //передача процесса загркзки асинхронно 
+        let progress = Double(totalBytesWritten) / Double(totalBytesExpectedToWrite)
+        print("Download progress: \(progress)")
         DispatchQueue.main.async {
             self.onProgress?(progress)
         }

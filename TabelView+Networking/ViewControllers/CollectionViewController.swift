@@ -27,6 +27,12 @@ private let url = "https://jsonplaceholder.typicode.com/posts"
 private let urlUploadImage = "https://api.imgur.com/3/image"   //ссылка на сервер для загузки изображения
 
 class CollectionViewController: UIViewController {
+    
+    //создаем аллерт для отопражения загрузки принажатии на "Download File"
+    private var alert: UIAlertController!
+    
+    //создаю экземпляр DataProvider
+    private let dataProvaider = DataProvider()
 
     //let actiion = ["Download Image", "GET", "POST", "Our Courses", "Upload Image"]
     
@@ -64,6 +70,63 @@ class CollectionViewController: UIViewController {
         
         myCollection.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+    }
+    
+    //метод создания и вызова аллерт контроллера
+    private func showAlert(){
+        
+        
+        alert = UIAlertController(title: "Downloading...", message: "0%", preferredStyle: .alert)
+        //делаю алерт подлинее
+        let hightAlertCost = NSLayoutConstraint(item: alert.view!,
+                                                attribute: .height,
+                                                relatedBy: .equal,
+                                                toItem: nil,
+                                                attribute: .notAnAttribute,
+                                                multiplier: 0,
+                                                constant: 185)
+        //подключаю констреинт
+        alert.view.addConstraint(hightAlertCost)
+        
+        //создаю кнопку выхода и добавляю ей функцию отмены загрузки
+        let canselAlertButton = UIAlertAction(title: "Cansel", style: .destructive){ (action) in
+            self.dataProvaider.stopDownload()
+        }
+        
+        alert.addAction(canselAlertButton)
+        
+        //через замыкание создаю и вызывваю активити контроллер и прогресс бар
+        present(alert, animated: true){
+            
+            //let sizeActivit = CGSize.init(width: 40, height: 40)   //задаю размер для активити индикатора
+            //создаю коардинаты для активити контроллера чтобы он был посередтине аллерт контроллера( - sizeActivitm / 2 тк это коардинаты правой верхней точки)
+            //let pointActivit = CGPoint(x: self.alert.view.frame.width / 2 - sizeActivit.width / 2, y: self.alert.view.frame.height / 2 - sizeActivit.height / 2)
+            //let indicator = UIActivityIndicatorView(frame: CGRect(origin: pointActivit, size: sizeActivit)) //инициализируем объект с созданными значениями
+            let indicator = UIActivityIndicatorView()
+            indicator.color = .gray
+            indicator.startAnimating()
+            
+            //y: self.alert.view.frame.height - 44    -- высота котролеера минус высота кнопки
+            //let progressView = UIProgressView(frame: CGRect(x: 0, y: self.alert.view.frame.height - 44, width: self.alert.view.frame.width, height: 5))
+            let progressView = UIProgressView()
+            progressView.tintColor = .green
+            progressView.progress = 0.5
+            
+            self.alert.view.addSubview(indicator)
+            self.alert.view.addSubview(progressView)
+            
+            //тк не нравится СG переписал на SnapKit
+            indicator.snp.makeConstraints { make in
+                make.center.equalToSuperview()
+                make.width.height.equalTo(40)
+            }
+            
+            progressView.snp.makeConstraints { make in
+                make.bottom.equalToSuperview().inset(44)  //44 размер кнопки cansel
+                make.width.equalToSuperview()
+                make.height.equalTo(5)
+            }
         }
     }
     
@@ -106,7 +169,9 @@ extension CollectionViewController: UICollectionViewDelegate{
         case .uploadImage:
             NetworkManager.uploadImage(url: urlUploadImage)
         case .downloadFile:
-            print("download")
+            showAlert()
+            dataProvaider.startDownload()  //по нажатию на кнопку начать загрркзку
+            
         }
     }
 }
