@@ -21,29 +21,20 @@ class AlamofireNetworkRequest {
         
         guard let url = URL(string: url) else { return }
     
-        //по умолчанию происходит get запрос
-        //если необходимо создать опрелеленный запрос в request указваем параметор mettod
-        //AF.request(url, method: .post)
-        AF.request(url, method: .get).responseJSON { response in
+       //после request вызываем validate для создания валидации
+        AF.request(url, method: .get).validate().responseJSON { response in
             
-            //демаем проверку по статус коду
-            //у ответа сервера получаем статус код
-            guard let statusCode = response.response?.statusCode else { return }
-            print("SC --- \(statusCode)")
-            
-            //проверяем статус код диапазоном
-            //если статус код от 200 до 300 включительно
-            //получить значение у ответа сервера и вывести на экран
-            if (200..<300).contains(statusCode){
-                let value = response.value
-                print("value: ", value ?? "nil")
-            }else{
-                //в случае статус кода указывающего на ошибку
-                //создаем переменную хронящуу в себе ошибку
-                //выводим ошибку на экран
-                let error = response.error
-                print("ERROR - ", error ?? "error")
+            //проверяем через switch
+            //у response есть параметр result который может сказать пришел ответ с ошибкой или с результатом
+            switch response.result{
+                //удачная связь с сервером с объетом полученого значения (let value)
+            case .success(let value):
+                print(value)
+                //ошибка полученная с сервера с объетом полученого значения (let value)
+            case .failure(let error):
+                print(error)
             }
+           
         }
     }
 }
