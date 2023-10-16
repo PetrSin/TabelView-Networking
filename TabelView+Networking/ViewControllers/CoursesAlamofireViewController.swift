@@ -1,15 +1,15 @@
 //
-//  CoursesPageViewController.swift
+//  CoursesAlamofireViewController.swift
 //  TabelView+Networking
 //
-//  Created by petar on 26.09.2023.
+//  Created by petar on 10.10.2023.
 //
 
 import UIKit
 import WebKit
 import SnapKit
 
-class CoursesPageViewController: UIViewController {
+class CoursesAlamofireViewController: UIViewController {
 
     var myTabelview = UITableView()
     var courses = [Course]()                    //тк код из блка do имеет ограниченную область видимости делаю его свойством класса
@@ -25,7 +25,7 @@ class CoursesPageViewController: UIViewController {
         super.viewDidLoad()
         createNavigBar()
         createTableView()
-        fetchData()
+        //fetchData()
         
     }
     private func createTableView(){
@@ -98,11 +98,11 @@ class CoursesPageViewController: UIViewController {
 
 
 
-extension CoursesPageViewController{
+extension CoursesAlamofireViewController{
     static let idCell = "MyCell"
 }
 
-extension CoursesPageViewController: UITableViewDelegate, UITableViewDataSource{
+extension CoursesAlamofireViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return courses.count   //кол-во ячеек равно количеству эллеметов в массиве courses
     }

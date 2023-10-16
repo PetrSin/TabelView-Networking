@@ -30,6 +30,8 @@ class DataProvider: NSObject{
         let config = URLSessionConfiguration.background(withIdentifier: "Hello")
         config.isDiscretionary = true      //свойство определяет могут ли фоновые задачи быть запланированны по усматрению системы (для передачи больших данных ставим тру)
         config.sessionSendsLaunchEvents = true    //по завершению загрузки данных приложение запустится в фоновм режиме
+        config.timeoutIntervalForResource = 300 //время ожидания сети в секундах
+        config.waitsForConnectivity = true //ожидание подключения к стети 
         //возаращаем объект URLSession с параметрами конфигурации сессии( в качетве делегата протокола назаначаю этот класс)
         return URLSession(configuration: config , delegate: self, delegateQueue: nil )
     }()

@@ -7,6 +7,7 @@ target 'TabelView+Networking' do
 
   # Pods for TabelView+Networking
 pod 'SnapKit'
+pod 'Alamofire'
 
 
 end

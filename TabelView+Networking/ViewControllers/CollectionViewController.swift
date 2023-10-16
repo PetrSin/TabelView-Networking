@@ -19,6 +19,7 @@ enum Actions: String, CaseIterable{
     case ourCourses = "Our Courses"
     case uploadImage = "Upload Image"
     case downloadFile = "Download File"
+    case ourCoursesAlomo = "Our Courses Alamofire"
 }
 
 
@@ -171,6 +172,10 @@ extension CollectionViewController: UICollectionViewDelegate{
         case .downloadFile:
             showAlert()
             dataProvaider.startDownload()  //по нажатию на кнопку начать загрркзку
+        case .ourCoursesAlomo:
+            //открываю CoursesAlamofireViewController полная копия CoursesPageViewController но переписан на Alamofire
+            navigationController?.pushViewController(CoursesAlamofireViewController(), animated: true)
+            AlamofireNetworkRequest.sendRequest(url: "https://swiftbook.ru//wp-content/uploads/api/api_courses")
             
         }
     }

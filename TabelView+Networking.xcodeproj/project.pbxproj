@@ -22,6 +22,8 @@
 		D2E648432AC33DA600B17E27 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E648422AC33DA600B17E27 /* Course.swift */; };
 		D2E648452ACC594B00B17E27 /* ImageProperties .swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E648442ACC594B00B17E27 /* ImageProperties .swift */; };
 		D2E648472ACC78B100B17E27 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E648462ACC78B100B17E27 /* DataProvider.swift */; };
+		D2ED8BAD2AD5AD730046FCBE /* CoursesAlamofireViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2ED8BAC2AD5AD730046FCBE /* CoursesAlamofireViewController.swift */; };
+		D2ED8BAF2AD5B3EA0046FCBE /* AlamofireNetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2ED8BAE2AD5B3EA0046FCBE /* AlamofireNetworkRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +45,8 @@
 		D2E648422AC33DA600B17E27 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		D2E648442ACC594B00B17E27 /* ImageProperties .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageProperties .swift"; sourceTree = "<group>"; };
 		D2E648462ACC78B100B17E27 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
+		D2ED8BAC2AD5AD730046FCBE /* CoursesAlamofireViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesAlamofireViewController.swift; sourceTree = "<group>"; };
+		D2ED8BAE2AD5B3EA0046FCBE /* AlamofireNetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireNetworkRequest.swift; sourceTree = "<group>"; };
 		D5E90FEF331F98E17A7F3A6C /* Pods-TabelView+Networking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TabelView+Networking.debug.xcconfig"; path = "Target Support Files/Pods-TabelView+Networking/Pods-TabelView+Networking.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -125,6 +129,7 @@
 				D2E648332AC33BED00B17E27 /* WebViewController.swift */,
 				D2E648352AC33C1700B17E27 /* CoursesPageViewController.swift */,
 				D2E648372AC33C4600B17E27 /* DownloadImageController.swift */,
+				D2ED8BAC2AD5AD730046FCBE /* CoursesAlamofireViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -143,6 +148,7 @@
 			children = (
 				D2E6483F2AC33D6600B17E27 /* NetworkManager.swift */,
 				D2E648462ACC78B100B17E27 /* DataProvider.swift */,
+				D2ED8BAE2AD5B3EA0046FCBE /* AlamofireNetworkRequest.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -272,10 +278,12 @@
 			files = (
 				D2E648432AC33DA600B17E27 /* Course.swift in Sources */,
 				D2E6483B2AC33CBF00B17E27 /* CourseCell.swift in Sources */,
+				D2ED8BAF2AD5B3EA0046FCBE /* AlamofireNetworkRequest.swift in Sources */,
 				D2E648322AC33B9C00B17E27 /* CollectionViewController.swift in Sources */,
 				D2E648342AC33BED00B17E27 /* WebViewController.swift in Sources */,
 				D2E648362AC33C1700B17E27 /* CoursesPageViewController.swift in Sources */,
 				D2E648472ACC78B100B17E27 /* DataProvider.swift in Sources */,
+				D2ED8BAD2AD5AD730046FCBE /* CoursesAlamofireViewController.swift in Sources */,
 				D2E648402AC33D6600B17E27 /* NetworkManager.swift in Sources */,
 				D2E6483D2AC33D1200B17E27 /* CollectionCell.swift in Sources */,
 				D2E648452ACC594B00B17E27 /* ImageProperties .swift in Sources */,
