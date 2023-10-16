@@ -15,22 +15,24 @@ import Alamofire
 //класс для работы с alamofire 
 class AlamofireNetworkRequest {
     
-    //метод request библиотеки alamofire (один из трех глобальных методов этой либы)
-    //для его вызова не нужно создавать экземпляр класса Alamofire, необходимо обратиться напрямую
-    static func sendRequest(url: String){
+   //изменяю список параметров методат sendRequest для добавления комплишина для передачи данных в табоицу
+    static func sendRequest(url: String, comletion: @escaping (_ courses: [Course])->()){
         
         guard let url = URL(string: url) else { return }
     
-       //после request вызываем validate для создания валидации
+       
         AF.request(url, method: .get).validate().responseJSON { response in
             
-            //проверяем через switch
-            //у response есть параметр result который может сказать пришел ответ с ошибкой или с результатом
+            //тк полученный ответ с сервера имеет тип словарь Any, его нобходимо привести к словрью String:Any
             switch response.result{
-                //удачная связь с сервером с объетом полученого значения (let value)
             case .success(let value):
-                print(value)
-                //ошибка полученная с сервера с объетом полученого значения (let value)
+                //объявляю массив для данных полученных из интернета и пропущеных через модель
+                var courses = [Course]()
+                //в список после использования метода будут добавленны все полученные данные из интернета
+                courses = Course.getArray(from: value)!
+                //вызываю комплишн для передачи данных
+                comletion(courses)
+                
             case .failure(let error):
                 print(error)
             }

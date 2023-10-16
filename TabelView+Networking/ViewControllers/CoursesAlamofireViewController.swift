@@ -25,7 +25,7 @@ class CoursesAlamofireViewController: UIViewController {
         super.viewDidLoad()
         createNavigBar()
         createTableView()
-        //fetchData()
+        fetchData()
         
     }
     private func createTableView(){
@@ -45,7 +45,7 @@ class CoursesAlamofireViewController: UIViewController {
     
     private func createNavigBar(){
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(back(param: )))
-        navigationItem.title = "Courses"
+        navigationItem.title = "Courses /alamo/"
     }
     
     @objc private func back(param: UIBarButtonItem){
@@ -53,11 +53,11 @@ class CoursesAlamofireViewController: UIViewController {
     }
     
     func fetchData(){
-        //вызываю метод для получения данных о курсах из NetworkManager и через completion передаю данные в массив и вызываю перезагрузку странницы
-        NetworkManager.fetchDataCourse(url: url) { courses in
+        
+        //вызываю метод для получения инфоримции о курсах от сервера
+        AlamofireNetworkRequest.sendRequest(url: "https://swiftbook.ru//wp-content/uploads/api/api_courses") { courses in
             self.courses = courses
             
-            //в основном потоке асинхронно обнавляю данные в таблице
             DispatchQueue.main.async {
                 self.myTabelview.reloadData()
             }
@@ -82,7 +82,7 @@ class CoursesAlamofireViewController: UIViewController {
         //работа с данными которые получаем из сети должно происходить асинхронно в глобальном потоке
         DispatchQueue.global().async {
             //получем данные о картинки с сервера и через dataTask вставляем из в ячейку
-            guard let url = URL(string: course.imageUrl) else { return }
+            guard let url = URL(string: course.imageUrl ?? "nil") else { return }
             guard let imageData = try? Data(contentsOf: url) else { return }  //создаю экземпляр класса Data и получаю данные из url
             
             //отрисовка интерфейса долно происходить асинхронно но в основном потоке
@@ -125,8 +125,8 @@ extension CoursesAlamofireViewController: UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let course = courses[indexPath.row]  //в переменную сохраняем элемент массива по которму тапнул пользователь
         
-        urlSelectCourse = course.link   //сохраняем в переменную ссылку на выбранный курс
-        nameSelectCourse = course.name
+        urlSelectCourse = course.link ?? "nil"  //сохраняем в переменную ссылку на выбранный курс
+        nameSelectCourse = course.name ?? "nil"
         
         //метод который после тапа на ячейку открывает следующий контроллер
         performSelector(inBackground: #selector(presentWebView), with: nil)

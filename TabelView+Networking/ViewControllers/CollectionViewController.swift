@@ -175,8 +175,6 @@ extension CollectionViewController: UICollectionViewDelegate{
         case .ourCoursesAlomo:
             //открываю CoursesAlamofireViewController полная копия CoursesPageViewController но переписан на Alamofire
             navigationController?.pushViewController(CoursesAlamofireViewController(), animated: true)
-            AlamofireNetworkRequest.sendRequest(url: "https://swiftbook.ru//wp-content/uploads/api/api_courses")
-            
         }
     }
 }

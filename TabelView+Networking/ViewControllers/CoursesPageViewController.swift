@@ -82,7 +82,7 @@ class CoursesPageViewController: UIViewController {
         //работа с данными которые получаем из сети должно происходить асинхронно в глобальном потоке
         DispatchQueue.global().async {
             //получем данные о картинки с сервера и через dataTask вставляем из в ячейку
-            guard let url = URL(string: course.imageUrl) else { return }
+            guard let url = URL(string: course.imageUrl ?? "nil") else { return }
             guard let imageData = try? Data(contentsOf: url) else { return }  //создаю экземпляр класса Data и получаю данные из url
             
             //отрисовка интерфейса долно происходить асинхронно но в основном потоке
@@ -125,8 +125,8 @@ extension CoursesPageViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let course = courses[indexPath.row]  //в переменную сохраняем элемент массива по которму тапнул пользователь
         
-        urlSelectCourse = course.link   //сохраняем в переменную ссылку на выбранный курс
-        nameSelectCourse = course.name
+        urlSelectCourse = course.link ?? "nil"  //сохраняем в переменную ссылку на выбранный курс
+        nameSelectCourse = course.name ?? "nil"
         
         //метод который после тапа на ячейку открывает следующий контроллер
         performSelector(inBackground: #selector(presentWebView), with: nil)
