@@ -39,4 +39,50 @@ class AlamofireNetworkRequest {
            
         }
     }
+    
+    //метод для загрузки json с сервера
+    static func getCoursesJson(url: String){
+        
+        //выполняю запрос для получения курсов с сервера в формате json
+        AF.request(url).responseData { responseDara in
+            
+            switch responseDara.result{
+            case .success(let data):
+                //проверям получение данных и переводим их в string через кодировку
+                guard let stringData = String(data: data, encoding: .utf8) else { return }
+                print(stringData)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    //метод для получения строки с сервера
+    static func getStringAalamofire(url: String){
+        
+        AF.request(url).responseString { responseString in
+            //в данном методе не нужно делать проверку гвардом тк прийдет точно стринг
+            switch responseString.result{
+            case .success(let massage):
+                print(massage)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    //метод получения данных с сервера без обработки и отдает их в том виде которм они получены
+    //result -- отсудствует
+    static func justResponse(url: String){
+        
+        AF.request(url).response { response in
+            //тк отсудствует result делаем проверку через guard и вызываем методы конвертации у полученных значений
+            //перврщаем полученные данные сначала в дату потом изи даты в строку
+            guard
+                let data = response.data,
+                let string = String(data: data, encoding: .utf8)
+            else { return }
+            print(string)
+        }
+    }
 }

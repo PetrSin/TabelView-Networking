@@ -11,7 +11,7 @@ import Alamofire
 
 class ResponseDataAlamofierImageController: UIViewController {
     
-    private let url = "https://funart.top/uploads/posts/2022-08/1659985029_3-funart-pro-p-anime-tyanka-art-krasivo-3.jpg"
+    private let url = "https://w0.peakpx.com/wallpaper/162/415/HD-wallpaper-cute-anime-cat-girl-cute-cat-girl-with-cat-pose-anime.jpg"
 
     let imageFromNetwork: UIImageView = {
         var view = UIImageView()

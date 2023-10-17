@@ -21,12 +21,15 @@ enum Actions: String, CaseIterable{
     case downloadFile = "Download File"
     case ourCoursesAlomo = "Our Courses Alamofire"
     case responseData = "response Data Alamo"
+    case responseString = "response String Alamofire"      //кнопка для получения текстовой инфы с сервера
+    case justResponse = "just response alamofire"
 }
 
 
 
 private let url = "https://jsonplaceholder.typicode.com/posts"
 private let urlUploadImage = "https://api.imgur.com/3/image"   //ссылка на сервер для загузки изображения
+private let swiftBookAPI = "https://swiftbook.ru//wp-content/uploads/api/api_courses"
 
 class CollectionViewController: UIViewController {
     
@@ -178,7 +181,11 @@ extension CollectionViewController: UICollectionViewDelegate{
             navigationController?.pushViewController(CoursesAlamofireViewController(), animated: true)
         case .responseData:
             navigationController?.pushViewController(ResponseDataAlamofierImageController(), animated: true)
-
+            AlamofireNetworkRequest.getCoursesJson(url: swiftBookAPI)
+        case .responseString:
+            AlamofireNetworkRequest.getStringAalamofire(url: swiftBookAPI)
+        case .justResponse:
+            AlamofireNetworkRequest.justResponse(url: swiftBookAPI)
         }
     }
 }
