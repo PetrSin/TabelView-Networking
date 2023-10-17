@@ -20,6 +20,7 @@ enum Actions: String, CaseIterable{
     case uploadImage = "Upload Image"
     case downloadFile = "Download File"
     case ourCoursesAlomo = "Our Courses Alamofire"
+    case responseData = "response Data Alamo"
 }
 
 
@@ -175,6 +176,9 @@ extension CollectionViewController: UICollectionViewDelegate{
         case .ourCoursesAlomo:
             //открываю CoursesAlamofireViewController полная копия CoursesPageViewController но переписан на Alamofire
             navigationController?.pushViewController(CoursesAlamofireViewController(), animated: true)
+        case .responseData:
+            navigationController?.pushViewController(ResponseDataAlamofierImageController(), animated: true)
+
         }
     }
 }

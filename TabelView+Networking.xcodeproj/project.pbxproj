@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0F4B3B54B764F6E6E13F0C6C /* Pods_TabelView_Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE62566F4482C8A9FC9E9C94 /* Pods_TabelView_Networking.framework */; };
+		D28732B42ADEDC390001FCE7 /* ResponseDataAlamofierImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28732B32ADEDC390001FCE7 /* ResponseDataAlamofierImageController.swift */; };
 		D2E6481C2AC338E100B17E27 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E6481B2AC338E100B17E27 /* AppDelegate.swift */; };
 		D2E648232AC338E100B17E27 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2E648212AC338E100B17E27 /* Main.storyboard */; };
 		D2E648252AC338E100B17E27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2E648242AC338E100B17E27 /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 /* Begin PBXFileReference section */
 		17AFA8860F4B52882A918EDA /* Pods-TabelView+Networking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TabelView+Networking.release.xcconfig"; path = "Target Support Files/Pods-TabelView+Networking/Pods-TabelView+Networking.release.xcconfig"; sourceTree = "<group>"; };
 		AE62566F4482C8A9FC9E9C94 /* Pods_TabelView_Networking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TabelView_Networking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D28732B32ADEDC390001FCE7 /* ResponseDataAlamofierImageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseDataAlamofierImageController.swift; sourceTree = "<group>"; };
 		D2E648182AC338E100B17E27 /* TabelView+Networking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TabelView+Networking.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2E6481B2AC338E100B17E27 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2E648222AC338E100B17E27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				D2E648352AC33C1700B17E27 /* CoursesPageViewController.swift */,
 				D2E648372AC33C4600B17E27 /* DownloadImageController.swift */,
 				D2ED8BAC2AD5AD730046FCBE /* CoursesAlamofireViewController.swift */,
+				D28732B32ADEDC390001FCE7 /* ResponseDataAlamofierImageController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				D2E648452ACC594B00B17E27 /* ImageProperties .swift in Sources */,
 				D2E6481C2AC338E100B17E27 /* AppDelegate.swift in Sources */,
 				D2E648382AC33C4600B17E27 /* DownloadImageController.swift in Sources */,
+				D28732B42ADEDC390001FCE7 /* ResponseDataAlamofierImageController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
