@@ -25,6 +25,7 @@ enum Actions: String, CaseIterable{
     case justResponse = "just response alamofire"
     case downloadImageBG = "Download Image BG Alamo"      //кнопка перекидывающаяя на экран загрузки изображения в фоне через alamofire
     case postAlamofire = "Post with Alamofier"            //создаение post запроса серез alamofier 
+    case putRequest = "Put Request Alamofier"
 }
 
 
@@ -192,6 +193,11 @@ extension CollectionViewController: UICollectionViewDelegate{
             navigationController?.pushViewController(DownloadImageBGViewController(), animated: true)
         case .postAlamofire:
             navigationController?.pushViewController(PostCourseAlamofierViewController(), animated: true)
+        case .putRequest:
+            //по нажатию будут изменены данные на сервере
+            AlamofireNetworkRequest.putRequestWithAlamofire(url: "https://jsonplaceholder.typicode.com/posts/1") { courses in
+                print("-----------------------------------------------")
+            }
         }
         }
     }

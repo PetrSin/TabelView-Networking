@@ -188,4 +188,43 @@ class AlamofireNetworkRequest {
         }
         
     }
+    
+    
+    
+    //PUT request метод для обнавления данных на сервере
+    static func putRequestWithAlamofire(url: String, comletion: @escaping (_ courses: [Course])->()){
+        
+        guard let url = URL(string: url) else { return }
+         
+        //всталяю новые данные которые обновляю на сервере
+        let userData: [String: Any] = ["name": "Network Request  1-1-1-1-1-1-1",
+                                       "link": "https://swiftbook.ru/contents/our-first-applications/",
+                                       "imageUrl": "https://swiftbook.ru/wp-content/uploads/sites/2/2018/08/notifications-course-with-background.png",
+                                       "number_of_lessons": 18,
+                                       "number_of_tests": 10]
+        
+        //меняю  метод запроса на .put
+        AF.request(url, method: .put, parameters: userData).responseJSON { responseJSON in
+            
+            //делам проверку успешности запроса
+            guard let statusCode = responseJSON.response?.statusCode else { return }
+            print("status code -  " ,statusCode)
+            print(responseJSON)
+           
+            switch responseJSON.result{
+            case .success(let value):
+                print(value)
+                guard let jsonObject = value as? [String: Any],
+                        let course = Course(json: jsonObject)  else { return }
+                
+                var courses = [Course]()
+                courses.append(course)
+                comletion(courses)
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
+    }
 }
