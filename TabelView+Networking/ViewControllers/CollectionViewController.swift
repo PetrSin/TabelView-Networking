@@ -23,6 +23,8 @@ enum Actions: String, CaseIterable{
     case responseData = "response Data Alamo"
     case responseString = "response String Alamofire"      //кнопка для получения текстовой инфы с сервера
     case justResponse = "just response alamofire"
+    case downloadImageBG = "Download Image BG Alamo"      //кнопка перекидывающаяя на экран загрузки изображения в фоне через alamofire
+    case postAlamofire = "Post with Alamofier"            //создаение post запроса серез alamofier 
 }
 
 
@@ -186,9 +188,14 @@ extension CollectionViewController: UICollectionViewDelegate{
             AlamofireNetworkRequest.getStringAalamofire(url: swiftBookAPI)
         case .justResponse:
             AlamofireNetworkRequest.justResponse(url: swiftBookAPI)
+        case .downloadImageBG:
+            navigationController?.pushViewController(DownloadImageBGViewController(), animated: true)
+        case .postAlamofire:
+            navigationController?.pushViewController(PostCourseAlamofierViewController(), animated: true)
+        }
         }
     }
-}
+
 
 //раширения для интендификатора ячеки
 extension CollectionViewController{
