@@ -8,9 +8,27 @@
 
 
 
-import Foundation
+import SwiftyJSON
 import UIKit
 import Alamofire
+
+typealias CourcesResponse = (Result<[Course], AFError>) -> Void
+
+protocol CourceTaskProtocol {
+    func loadCources(completion: @escaping CourcesResponse)
+}
+
+struct CourceTask: CourceTaskProtocol {
+    func loadCources(completion: @escaping CourcesResponse) {
+        AF.request("https://swiftbook.ru//wp-content/uploads/api/api_courses",
+                   method: .get)
+        .validate()
+        .responseDecodable(of: [Course].self,
+                           completionHandler: { response in
+            completion(response.result)
+        })
+    }
+}
 
 //класс для работы с alamofire 
 class AlamofireNetworkRequest {
@@ -30,12 +48,10 @@ class AlamofireNetworkRequest {
             //тк полученный ответ с сервера имеет тип словарь Any, его нобходимо привести к словрью String:Any
             switch response.result{
             case .success(let value):
+                let json = JSON(value)
                 //объявляю массив для данных полученных из интернета и пропущеных через модель
-                var courses = [Course]()
-                //в список после использования метода будут добавленны все полученные данные из интернета
-                courses = Course.getArray(from: value)!
-                //вызываю комплишн для передачи данных
-                comletion(courses)
+                let courses = json.array?.map { Course(json: $0) }
+                comletion(courses ?? [])
                 
             case .failure(let error):
                 print(error)
@@ -172,8 +188,8 @@ class AlamofireNetworkRequest {
                 print(value)
                 //для того чтобы с объектом можно было работать необхоимо его привести к необходимым данным
                 //если приведения объекта value (имеющего тип Any) к необходимому типу проходит успешно, то создаем объект course в который передаем приобразованные данные и парсим их по структуре Course
-                guard let jsonObject = value as? [String: Any], 
-                        let course = Course(json: jsonObject)  else { return }
+                guard let jsonObject = value as? [String: Any] else { return }
+                let course = Course(json: JSON(jsonObject))
                 
                 //создаем массив с типом Course чтобы добавить полученные данные и преобазованные в необходимый тип
                 var courses = [Course]()
@@ -214,8 +230,8 @@ class AlamofireNetworkRequest {
             switch responseJSON.result{
             case .success(let value):
                 print(value)
-                guard let jsonObject = value as? [String: Any],
-                        let course = Course(json: jsonObject)  else { return }
+                guard let jsonObject = value as? [String: Any] else { return }
+                let course = Course(json: JSON(jsonObject))
                 
                 var courses = [Course]()
                 courses.append(course)

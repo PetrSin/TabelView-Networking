@@ -19,7 +19,7 @@ class CoursesAlamofireViewController: UIViewController {
     //через func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     var nameSelectCourse = ""
     var urlSelectCourse = ""
-    
+    let courceTask: CourceTaskProtocol = CourceTask()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,13 +53,17 @@ class CoursesAlamofireViewController: UIViewController {
     }
     
     func fetchData(){
-        
         //вызываю метод для получения инфоримции о курсах от сервера
-        AlamofireNetworkRequest.sendRequest(url: "https://swiftbook.ru//wp-content/uploads/api/api_courses") { courses in
-            self.courses = courses
-            
-            DispatchQueue.main.async {
-                self.myTabelview.reloadData()
+        courceTask.loadCources { response in
+            switch response {
+            case .success(let courses):
+                self.courses = courses
+                DispatchQueue.main.async {
+                    self.myTabelview.reloadData()
+                }
+            case .failure(let error):
+                // вывести алерт
+                print(error.localizedDescription)
             }
         }
     }
